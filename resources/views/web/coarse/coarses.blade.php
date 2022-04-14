@@ -35,7 +35,7 @@
                   </div>
                 </div>
               </div>
-             @endforeach
+            @endforeach
           </div>
           <hr class="my-4" />
       </div>

@@ -38,8 +38,11 @@
           <h3 class="mb-3 mb-md-0">Sign Up For Our Newsletter</h3>
 
           <div class="input-group news-input">
-            <input type="text" class="form-control" placeholder="Enter Email" />
-            <button class="btn btn-dark btn-lg" type="button">Submit</button>
+            <p class="lead my-4">
+              ItCourses is a platform that provides a collection of courses from udemy ,blogs about tech  and tutorials about coding.
+            </p>
+{{--             <input type="text" class="form-control" placeholder="Enter Email" />
+            <button class="btn btn-dark btn-lg" type="button">Submit</button> --}}
           </div>
         </div>
       </div>
