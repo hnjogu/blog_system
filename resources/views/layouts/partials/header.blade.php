@@ -14,6 +14,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet" type="text/css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
             <!--------- favico---------->
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo/favicon/favicon/android-chrome-192x192.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/logo/favicon/favicon/android-chrome-512x512.png') }}">

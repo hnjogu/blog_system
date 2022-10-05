@@ -37,6 +37,10 @@
                             <div class="mt-2">Manage<br>Category</div>
                         </a>
 
+                        <a class="btn btn-dblue btn-sm" href="{{ url('/ch/ats/em/a/il') }}"><i class="fa-brands fa-rocketchat fa-3x"></i>
+                            <div class="mt-2">Manage<br>Messages</div>
+                        </a>
+
 
             </div>
         </div>

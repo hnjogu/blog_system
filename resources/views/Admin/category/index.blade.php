@@ -14,7 +14,7 @@
         </ol>
         <div class="card mb-4">
             <div class="card-body">
-                <a class="d-none d-sm-inline-block btn btn-primary btn-xs  shadow-sm btn-sm" href="{{ url('/home') }}"><i class="fas fa-backward"></i> Back</a>
+                <a class="d-none d-sm-inline-block btn btn-primary btn-xs  shadow-sm btn-sm" href="{{ url('/a/dmin') }}"><i class="fas fa-backward"></i> Back</a>
             </div>
         </div>
         <div class="card mb-4">

@@ -11,6 +11,14 @@ use App\Rules\ReCaptcha;
 
 class ContactsController extends Controller
 {
+    public function index(Request $request)
+    {
+
+        $datacontact = contacts::orderBy('contact_id','DESC')
+         ->get();
+        return view('Admin.contacts_data.index',compact('datacontact'))
+        ->with('datacontact', $datacontact);
+    }
     public function contact(Request $request)
     {
 

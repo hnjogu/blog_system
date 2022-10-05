@@ -66,6 +66,9 @@ Route::group(['middleware' => ['auth']], function() {
             // category routes
     Route::get('/cat/gory', [categoryController::class, 'index'])->name('/cat/gory');
     Route::post('/add/cat',[categoryController::class,'addcategory'])->name('/add/cat');
+            //contacts
+    Route::get('/ch/ats/em/a/il', [ContactsController::class, 'index'])->name('/ch/ats/em/a/il');
+    
                 //logistics here
     Route::get('/logi/stics/panel', [contentcontroller::class, 'logistics'])->name('/logi/stics/panel');
                //header content updates
