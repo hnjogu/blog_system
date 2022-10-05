@@ -3,6 +3,9 @@ body::before {
   content: '';
   height: 60px;
 }
+/*#bg-dark {
+    background-color: #398b99!important;
+}*/
 
 #map {
   width: 100%;

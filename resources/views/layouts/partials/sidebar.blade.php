@@ -21,15 +21,19 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Parcel
                             </a> --}}
-                            <a class="nav-link" href="tables.html">
+                            {{-- <a class="nav-link" href="tables.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                            @if(Auth::check())
+                                <h5 class="mb-0 text-white nav-user-name">
+                                    {{ Auth::user()->name }}
+                                </h5>
+                            @endif
                     </div>
                 </nav>
             </div>

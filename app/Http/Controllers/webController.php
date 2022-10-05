@@ -30,11 +30,26 @@ use AshAllenDesign\LaravelExchangeRates\ExchangeRate;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 class webController extends Controller
 {
+
+    public static function getUdemyHttpClient()
+    {
+        return Http::withHeaders([
+            "Authorization" => sprintf(
+                "Basic %s", 
+                base64_encode(sprintf(
+                    "%s:%s", 
+                    config('services.udemy.id'), 
+                    config('services.udemy.secret'))
+                )
+            ),
+        ])->acceptJson();
+    }
+
     //
     public function welcome()
     {
         $datablog = content::orderBy('updated_at','DESC')
-          ->limit(2)
+          ->limit(3)
           //->whereDate('created_at', Carbon::today()->subDays(30))
          ->where('status','Available')
          ->get();
@@ -43,12 +58,25 @@ class webController extends Controller
           //->whereDate('created_at', Carbon::today()->subDays(30))
          ->where('status','Available')
          ->get();
+        $dataheadline = content::orderBy('updated_at','DESC')
+          ->limit(1)
+         ->where('status','Available')
+         ->where('category_name','Latest courses')
+         ->get();
+        $dataheadline_two = content::orderBy('updated_at','DESC')
+          ->limit(2)
+         ->where('status','Available')
+         ->where('category_name','headline')
+         ->get();
 
          // currency 
          //$data=Http::get('http://api.exchangeratesapi.io/v1/latest?access_key=a844972a41a4e4f4b3648a4147961a56&format=1')->json();
         $response = Http::acceptJson()
-            ->get('http://api.exchangeratesapi.io/v1/latest?access_key=a844972a41a4e4f4b3648a4147961a56&format=1');
+              ->get('https://open.er-api.com/v6/latest/USD');
+           // ->get('http://api.exchangeratesapi.io/v1/latest?access_key=a844972a41a4e4f4b3648a4147961a56&format=1');//coreect one
              //->get('https://freecurrencyapi.net/api/v2/latest');
+
+            
 
         if($response->failed()){
             // Handle failure here
@@ -56,7 +84,7 @@ class webController extends Controller
         // Data was fetched successfully
         $currency_data = $response->json();
         // return $data['rates'];
-        return view('welcome', compact('currency_data', 'datablog'));
+        return view('welcome', compact('currency_data', 'datablog', 'dataheadline', 'dataheadline_two'));
         // ->with('data', $data)
         // ->with('datablog', $datablog);
     }
@@ -78,9 +106,7 @@ class webController extends Controller
             ->get('http://api.exchangeratesapi.io/v1/latest?access_key=a844972a41a4e4f4b3648a4147961a56&format=1');
              //->get('https://freecurrencyapi.net/api/v2/latest');
 
-        $response = Http::withHeaders([
-            "Authorization" => "Basic S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==",
-        ])->acceptJson()->get("https://www.udemy.com/api-2.0/courses/"); // For Details add ID example 473160;
+        $response = self::getUdemyHttpClient()->get("https://www.udemy.com/api-2.0/courses/"); // For Details add ID example 473160;
 
         return $response->json();
 
@@ -97,13 +123,12 @@ class webController extends Controller
     public function coarsetab() 
     {
                  //udemy coarses
-        $response = Http::withHeaders([
-            "Authorization" => "Basic S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==",
-        ])->acceptJson()->get("https://www.udemy.com/api-2.0/courses/");
+        $response = self::getUdemyHttpClient()->get("https://www.udemy.com/api-2.0/courses/");
         //return $response->body();
 
         if($response->failed()){
-            // Handle failure here
+            \Log::error($response);
+            abort(503);
         }
         // coarses was fetched successfully
         $coarse_data = $response->json();
@@ -119,9 +144,7 @@ class webController extends Controller
     {
         //return "https://www.udemy.com/api-2.0/courses/{$id}/reviews/";
                  //udemy coarses
-        $response = Http::withHeaders([
-            "Authorization" => "Basic S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==S083b1pjUXFWOTRaWEVzNzVBakozeFA2VmVWTHNkVkdQZmw5T2VhQTpIRGh1aFNZY2Fkd3lqRElLcllKN3VZdExnREVsbU1kaE9FVjFwNWRvZ0pzVkhMVEVDM3BSR2JCU1gxV0RjV2VUT3dIWElMSlAzTG4xMmI3eHpNMEVnWnNGbVFEcFhSeGhxRkplN1hNeVJKM2lURzlyN1dXVERKeEhYRG90NW5ZYg==",
-        ])->acceptJson()->get("https://www.udemy.com/api-2.0/courses/{$id}/reviews/");
+        $response = self::getUdemyHttpClient()->get("https://www.udemy.com/api-2.0/courses/{$id}/reviews/");
         //return $response->body();
 
         if($response->failed()){
@@ -182,10 +205,20 @@ class webController extends Controller
     } 
     public function allblogs(Request $request) 
     {
-
+        $datacontect = content::orderBy('content_id','DESC')
+         ->where('category_name','Servers Configuration')
+         ->get();
+        $datablog = content::orderBy('updated_at','DESC')
+            ->limit(4)
+              //->whereDate('created_at', Carbon::today()->subDays(30))
+            ->where('status','Available')
+            ->where('category_name','Servers Configuration')
+            ->get();
 
             return view('web.blogs.all')
-        ->with('content', content::orderBy('updated_at', 'DESC')->get());
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Servers Configuration')->get())   
+        ->with('datablog', $datablog)
+        ->with('datacontect', $datacontect);
  
      //return view('web.blogs.all')
         // return view('web.blogs.all', [
@@ -193,5 +226,112 @@ class webController extends Controller
         //                 request(['search', 'category', 'author'])
         //             )->paginate(18)->withQueryString()
         // ]);
+    } 
+    public function hosting() 
+    {
+
+        return view('web.web_hosting.hosting_service');
+ 
+    }
+    public function hostWithus() 
+    {
+
+        return view('web.web_hosting.hosting_withus');
+ 
+    } 
+    public function programming(Request $request, $slug)
+    {
+        $content =content::latest()
+            ->where('slug', $slug)
+            ->first();
+
+        return view('web.programming.index')
+
+        ->with('content', $content);
+        //->with('content', content::latest()->where('slug', $slug)->first());
+    } 
+    public function allprogramming(Request $request) 
+    {
+        $datacontect = content::orderBy('content_id','DESC')
+         ->where('category_name','programming')
+         ->get();
+        $datablog = content::orderBy('updated_at','DESC')
+            ->limit(4)
+              //->whereDate('created_at', Carbon::today()->subDays(30))
+            ->where('status','Available')
+            ->where('category_name','programming')
+            ->get();
+
+            return view('web.programming.all')
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','programming')->get())        
+        ->with('datablog', $datablog)
+        ->with('datacontect', $datacontect);
+ 
+     //return view('web.blogs.all')
+        // return view('web.blogs.all', [
+        //     'posts' => content::latest()->filter(
+        //                 request(['search', 'category', 'author'])
+        //             )->paginate(18)->withQueryString()
+        // ]);
+    }
+    public function allavirtual(Request $request) 
+    {
+        $datacontect = content::orderBy('content_id','DESC')
+         ->where('category_name','Virtualization')
+         ->get();
+        $datablog = content::orderBy('updated_at','DESC')
+            ->limit(4)
+              //->whereDate('created_at', Carbon::today()->subDays(30))
+            ->where('status','Available')
+            ->where('category_name','Virtualization')
+            ->get();
+
+            return view('web.virtualization.all')
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Virtualization')->get())        
+        ->with('datablog', $datablog)
+        ->with('datacontect', $datacontect);
+    }  
+    public function allalinuxadmin(Request $request) 
+    {
+        $datacontect = content::orderBy('content_id','DESC')
+         ->where('category_name','Linux Administration')
+         ->get();
+        $datablog = content::orderBy('updated_at','DESC')
+            ->limit(4)
+              //->whereDate('created_at', Carbon::today()->subDays(30))
+            ->where('status','Available')
+            ->where('category_name','Linux Administration')
+            ->get();
+
+            return view('web.linuxadmin.all')
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Linux Administration')->get())        
+        ->with('datablog', $datablog)
+        ->with('datacontect', $datacontect);
+    } 
+    public function allacybersecurity(Request $request) 
+    {
+        $datacontect = content::orderBy('content_id','DESC')
+         ->where('category_name','Cyber Security')
+         ->get();
+         //dd($datacontect);
+        // $datacontect = content::orderBy('content_id','DESC')
+        //  //->join('categories', 'content.category_name', '=', 'categories.category_name')
+        //  //->exists('category_name','Cyber Security')
+        //  ->where('status','Available')
+        //  ->where('category_name','Cyber Security')
+        //  ->get();
+        $datablog = content::orderBy('updated_at','DESC')
+            //->join('categories', 'content.category_name', '=', 'categories.category_name')
+            ->limit(4)
+            //->exists('category_name','Cyber Security')
+              //->whereDate('created_at', Carbon::today()->subDays(30))
+            ->where('status','Available')
+            ->where('category_name','Cyber Security')
+            ->get();
+
+            return view('web.cybersecurity.all')
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Cyber Security')->get())        
+        ->with('datablog', $datablog)
+        ->with('datacontect', $datacontect);
     } 
 }

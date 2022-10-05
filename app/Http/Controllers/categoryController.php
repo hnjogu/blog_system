@@ -60,7 +60,8 @@ class categoryController extends Controller
 
 
         // GET ALL category
-    public function getcategoryList(Request $request){
+    public function getcategoryList(Request $request)
+    {
           //$cat = category::all();
            $cat = category::orderBy('id','ASC')
                 ->where('status','Available')
@@ -93,7 +94,8 @@ class categoryController extends Controller
 
 
         //UPDATE category DETAILS
-    public function updatecategoryDetails(Request $request){
+    public function updatecategoryDetails(Request $request)
+    {
         $category_id = $request->cid;
 
         $validator = \Validator::make($request->all(),[
@@ -140,7 +142,8 @@ class categoryController extends Controller
     }
 
 
-    public function deleteSelectedcategory(Request $request){
+    public function deleteSelectedcategory(Request $request)
+    {
        $category_ids = $request->category_ids;
        //category::whereIn('id', $category_ids)->delete();
        $query = category::whereIn('id', $category_ids);

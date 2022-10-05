@@ -13,7 +13,7 @@ class content extends Authenticatable
      * Important records to be filled
      */
     protected $fillable = [
-        'content_id','user_id','slug','category_id','content_title','description','photo','status',
+        'content_id','user_id','slug','category_id','sub_category','content_title','description','summary','photo','status','code_content',
 
     ];
 

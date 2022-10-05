@@ -23,6 +23,11 @@
                              <span class="text-danger error-text sub_category_error"></span>
                          </div>
                          <div class="form-group">
+                             <label for="">Slug</label>
+                             <input type="text" class="form-control" name="slug" placeholder="Enter slug">
+                             <span class="text-danger error-text slug_error"></span>
+                         </div>
+                         <div class="form-group">
                              <button type="submit" class="btn btn-block btn-success">Save Changes</button>
                          </div>
                      </form>

@@ -13,35 +13,49 @@
  {{--  {{$coarse_data['next']}} --}}
     
 
+        <!--ads section start here for all ads-->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6027569691193668"
+             crossorigin="anonymous"></script>
+        <!-- section one ads -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6027569691193668"
+             data-ad-slot="6491688281"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <!--ads section end here for all ads-->
+
       <div class="container mt-4 cta-50 cart">
           <h1 class="title">Udemy  <span class="blue">Course</span></h1>
           <hr>
           <div class="row">
-            @foreach ($coarse_data['results'] as $result)
-              <div class="col-md-3 mt-4">
-                <div class="card">
-                  <figure><img class="card-img-top" src="{{$result['image_240x135']}}"></figure> 
-                  <div class="card-body text-center">
-                    <div class="item-box-blog-data" style="padding: px 15px;">
-                      <p><i class="fa fa-user-o"></i> Price: {{$result['price']}}, <a href="https://www.udemy.com{{$result['url']}}">Go Udemy</a>
-                      </p>
+            @if ($coarse_data['results'] != null)
+              @foreach ($coarse_data['results'] as $result)
+                <div class="col-md-3 mt-4">
+                  <div class="card">
+                    <figure><img class="card-img-top" src="{{$result['image_240x135']}}"></figure> 
+                    <div class="card-body text-center">
+                      <div class="item-box-blog-data" style="padding: px 15px;">
+                        <p><i class="fa fa-user-o"></i> Price: {{$result['price']}}, <a href="https://www.udemy.com{{$result['url']}}">Go Udemy</a>
+                        </p>
+                      </div>
+                      <h5 class="card-title blue mb-3">{{$result['title']}}</h5>
+                      <p class="card-text text-muted">{{$result['published_title']}}</p>
+                      {{-- <p class="card-text text-muted">{{$result['id']}}</p> --}}
+                      {{-- <p class="card-text text-muted">{{$result['headline']}}</p> --}}
+                      <a class="button" href="https://www.udemy.com{{$result['url']}}"> <span><i class="fa fa-shopping-cart"></i>Visit Udemy</span> </a>
+                      {{-- <a class="button" href="{{ url('/vie/wco/arse/'.$result['id'])}}"> <span><i class="fa fa-shopping-cart"></i>View Coarse</span> </a> --}}
                     </div>
-                    <h5 class="card-title blue mb-3">{{$result['title']}}</h5>
-                    <p class="card-text text-muted">{{$result['published_title']}}</p>
-                    {{-- <p class="card-text text-muted">{{$result['id']}}</p> --}}
-                    {{-- <p class="card-text text-muted">{{$result['headline']}}</p> --}}
-                    <a class="button" href="https://www.udemy.com{{$result['url']}}"> <span><i class="fa fa-shopping-cart"></i>Visit Udemy</span> </a>
-                    {{-- <a class="button" href="{{ url('/vie/wco/arse/'.$result['id'])}}"> <span><i class="fa fa-shopping-cart"></i>View Coarse</span> </a> --}}
                   </div>
                 </div>
-              </div>
-            @endforeach
+              @endforeach
+            @endif
           </div>
           <hr class="my-4" />
       </div>
-
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6027569691193668"
-     crossorigin="anonymous"></script>
 
  
     

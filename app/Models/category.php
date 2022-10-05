@@ -9,7 +9,7 @@ class category extends Authenticatable
     use Notifiable;
     use HasFactory;
     public $table = "categories";
-    protected $primaryKey = 'category_id';
+    protected $primaryKey = 'id';
     public $timestamps = true;
     /*
      * Important records to be filled

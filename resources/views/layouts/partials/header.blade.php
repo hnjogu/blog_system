@@ -6,13 +6,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{{ config('app.name', 'Oceanic Logistics') }}</title>
+        <meta name="programmingvirtualizationserverconfigurationcomputer" content="...">
+        <title>{{ config('app.name', 'ItCourses') }}</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/styles.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/slider.css') }}">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet" type="text/css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+            <!--------- favico---------->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo/favicon/favicon/android-chrome-192x192.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/logo/favicon/favicon/android-chrome-512x512.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/logo/favicon/favicon.ico') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/logo/favicon/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/logo/favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/logo/favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('img/logo/favicon/site.webmanifest') }}">
 
 
 
@@ -36,7 +45,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="{{ url('/home') }}">Reload</a>
+            <a class="navbar-brand ps-3" href="{{ url('/') }}">View Site<i class="fas fa-globe"></i></a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -51,7 +60,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/sh/cha/ng/ow') }}">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
