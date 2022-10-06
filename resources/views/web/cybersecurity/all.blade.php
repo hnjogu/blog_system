@@ -12,12 +12,12 @@
 		        @if(empty($datacontect->status ))
 		            <span class="badge badge-danger">No Content At the Moment </span>
 		        @else
-		            @if($datacontect->status == 'Available')
+		            @if($datacontect->status == 'publish')
 			            <span class="breadcrumb-item active">{{ $datacontect->category_name }}</span>
 			        @endif
-			        @if($datacontect->status == 'Not Available')
+			        {{-- @if($datacontect->status == 'Not Available')
 			            <span class="breadcrumb-item active"><span class="badge bg-warning">No Post</span></span>
-			        @endif
+			        @endif --}}
 
 		        @endif
 	    </nav>

@@ -83,7 +83,31 @@
                                                     <a class='btn btn-info btn-sm' href="{{ url('/edi/tcont/ent/'.$data->content_id)}}"><i class="fas fa-edit"></i> Edit</a>
 
                                                     <a class='d-none d-sm-inline-block btn btn-warning btn-sm  shadow-sm btn-sm' href="{{ url('/web/tr/a/sh/'.$data->content_id)}}"><i class="fas fa-trash"></i> Delete</a>
-                                                    <a class='btn btn-danger btn-sm' href="{{ url('/web/Di/sa/ble/'.$data->content_id)}}"><i class="fas fa-ban"></i>Disable</a> 
+                                                     
+                                                    @if($data->status == 'publish')
+                                                        <span class="badge bg-success">Published</span>
+                                                    @elseif(empty($data->status))
+                                                        <span class="badge bg-success">Not Published</span>
+                                                    @else
+                                                       <a class='btn btn-success btn-sm' href="{{ url('/web/publ/i/sh/'.$data->content_id)}}"><i class="fas fa-check"></i> Publish</a>
+                                                    @endif 
+
+                                                    @if($data->status == 'Draft')
+                                                        <span class="badge bg-primary">Draft</span>
+                                                    @elseif(empty($data->status))
+                                                        <span class="badge bg-primary">Not Drafted</span>
+                                                    @else
+                                                       <a class='btn btn-primary btn-sm' href="{{ url('/web/un/D/ra/ft/'.$data->content_id)}}"><i class="fa-sharp fa-solid fa-xmark"></i>Draft</a>
+                                                    @endif 
+
+                                                    @if($data->status == 'Not Available')
+                                                        <span class="badge bg-warning">Review</span>
+                                                    @elseif(empty($data->status))
+                                                        <span class="badge bg-warning">Not Available</span>
+                                                    @else
+                                                       <a class='btn btn-danger btn-sm' href="{{ url('/web/Di/sa/ble/'.$data->content_id)}}"><i class="fas fa-ban"></i>Disable</a>
+                                                    @endif 
+                                                        
 
                                                     {{-- <a class='btn btn-success btn-sm' href="{{ url('/edi/tcont/ent/'.$data->content_id)}}"><i class="fas fa-check"></i> Publish</a>
                                                     <a class='btn btn-danger btn-sm' href="{{ url('/edi/tcont/ent/'.$data->content_id)}}"><i class="fas fa-ban"></i>Disable</a>  --}}
@@ -132,7 +156,7 @@
 
                                                     <a class='d-none d-sm-inline-block btn btn-warning btn-sm  shadow-sm btn-sm' href="{{ url('/web/tr/a/sh/'.$data->content_id)}}"><i class="fas fa-trash"></i> Delete</a>
 
-                                                    <a class='btn btn-danger btn-sm' href="{{ url('/web/un/D/ra/ft/'.$data->content_id)}}"><i class="fas fa-ban"></i>Draft</a> 
+                                                    <a class='btn btn-danger btn-sm' href="{{ url('/web/un/D/ra/ft/'.$data->content_id)}}"><i class="fa-sharp fa-solid fa-xmark"></i>Draft</a> 
                                                     
                                                      
                                                 </td>

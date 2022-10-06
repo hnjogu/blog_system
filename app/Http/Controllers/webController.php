@@ -51,21 +51,21 @@ class webController extends Controller
         $datablog = content::orderBy('updated_at','DESC')
           ->limit(3)
           //->whereDate('created_at', Carbon::today()->subDays(30))
-         ->where('status','Available')
+         ->where('status','publish')
          ->get();
         $datacoarse = coarses::orderBy('updated_at','DESC')
           ->limit(2)
           //->whereDate('created_at', Carbon::today()->subDays(30))
-         ->where('status','Available')
+         ->where('status','publish')
          ->get();
         $dataheadline = content::orderBy('updated_at','DESC')
           ->limit(1)
-         ->where('status','Available')
+         ->where('status','publish')
          ->where('category_name','Latest courses')
          ->get();
         $dataheadline_two = content::orderBy('updated_at','DESC')
           ->limit(2)
-         ->where('status','Available')
+         ->where('status','publish')
          ->where('category_name','headline')
          ->get();
 
@@ -93,12 +93,12 @@ class webController extends Controller
         $datablog = content::orderBy('updated_at','DESC')
           ->limit(2)
           //->whereDate('created_at', Carbon::today()->subDays(30))
-         ->where('status','Available')
+         ->where('status','publish')
          ->get();
         $datacoarse = coarses::orderBy('updated_at','DESC')
           ->limit(2)
           //->whereDate('created_at', Carbon::today()->subDays(30))
-         ->where('status','Available')
+         ->where('status','publish')
          ->get();
          // currency 
          //$data=Http::get('http://api.exchangeratesapi.io/v1/latest?access_key=a844972a41a4e4f4b3648a4147961a56&format=1')->json();
@@ -210,13 +210,13 @@ class webController extends Controller
          ->get();
         $datablog = content::orderBy('updated_at','DESC')
             ->limit(4)
-              //->whereDate('created_at', Carbon::today()->subDays(30))
-            ->where('status','Available')
+              //->whereDate('created_at', Carbon::today()->subDays(30))p
+            ->where('status','publish')
             ->where('category_name','Servers Configuration')
             ->get();
 
             return view('web.blogs.all')
-        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Servers Configuration')->get())   
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','publish')->where('category_name','Servers Configuration')->get())   
         ->with('datablog', $datablog)
         ->with('datacontect', $datacontect);
  
@@ -258,12 +258,12 @@ class webController extends Controller
         $datablog = content::orderBy('updated_at','DESC')
             ->limit(4)
               //->whereDate('created_at', Carbon::today()->subDays(30))
-            ->where('status','Available')
+            ->where('status','publish')
             ->where('category_name','programming')
             ->get();
 
             return view('web.programming.all')
-        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','programming')->get())        
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','publish')->where('category_name','programming')->get())        
         ->with('datablog', $datablog)
         ->with('datacontect', $datacontect);
  
@@ -282,12 +282,12 @@ class webController extends Controller
         $datablog = content::orderBy('updated_at','DESC')
             ->limit(4)
               //->whereDate('created_at', Carbon::today()->subDays(30))
-            ->where('status','Available')
+            ->where('status','publish')
             ->where('category_name','Virtualization')
             ->get();
 
             return view('web.virtualization.all')
-        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Virtualization')->get())        
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','publish')->where('category_name','Virtualization')->get())        
         ->with('datablog', $datablog)
         ->with('datacontect', $datacontect);
     }  
@@ -299,12 +299,12 @@ class webController extends Controller
         $datablog = content::orderBy('updated_at','DESC')
             ->limit(4)
               //->whereDate('created_at', Carbon::today()->subDays(30))
-            ->where('status','Available')
+            ->where('status','publish')
             ->where('category_name','Linux Administration')
             ->get();
 
             return view('web.linuxadmin.all')
-        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Linux Administration')->get())        
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','publish')->where('category_name','Linux Administration')->get())        
         ->with('datablog', $datablog)
         ->with('datacontect', $datacontect);
     } 
@@ -325,12 +325,12 @@ class webController extends Controller
             ->limit(4)
             //->exists('category_name','Cyber Security')
               //->whereDate('created_at', Carbon::today()->subDays(30))
-            ->where('status','Available')
+            ->where('status','publish')
             ->where('category_name','Cyber Security')
             ->get();
 
             return view('web.cybersecurity.all')
-        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','Available')->where('category_name','Cyber Security')->get())        
+        ->with('content', content::orderBy('updated_at', 'DESC')->where('status','publish')->where('category_name','Cyber Security')->get())        
         ->with('datablog', $datablog)
         ->with('datacontect', $datacontect);
     } 
